@@ -1,4 +1,4 @@
-import "../styles/header.css";
+import "./header.css";
 
 function Header() {
   return (
@@ -6,7 +6,7 @@ function Header() {
       <div className="headerInner">
         <div className="brand">
           <img src="/images/heart.png" alt="HabitTrack logo" className="logoIcon" />
-          <h1 className="brandText">HabitTrack</h1>
+          <h1 className="brandText">Habit Track</h1>
         </div>
 
         <nav className="nav">
