@@ -49,36 +49,56 @@ function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchTodayLog() {
+    async function fetchOrCreateTodayLog() {
       try {
         const response = await fetch("http://localhost:5000/api/logs");
         const data = await response.json();
 
-        const todayLog = data.find((log) => log.date === today);
+         /* I check if today’s log exists. If not, this automatically creates a new empty record,
+          which resets the app for a new day while keeping history */
+        let todayLog = data.find((log) => log.date === today);
 
-        if (todayLog) {
-          setTodayLogId(todayLog._id);
-
-          setHabits((currentHabits) =>
-            currentHabits.map((habit) => {
-              return {
-                ...habit,
-                done: todayLog[habit.field] || false,
-              };
+        if (!todayLog) {
+          const createResponse = await fetch("http://localhost:5000/api/logs", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              date: today,
+              sleep: false,
+              water: false,
+              exercise: false,
+              lowCarb: false,
+              noSugarDrink: false,
+              notes: "",
             }),
-          );
+          });
 
-          setNoteText(todayLog.notes || "");
-          setNoteDone((todayLog.notes || "").trim() !== "");
+          todayLog = await createResponse.json();
         }
+
+        setTodayLogId(todayLog._id);
+
+        setHabits((currentHabits) =>
+          currentHabits.map((habit) => {
+            return {
+              ...habit,
+              done: todayLog[habit.field] || false,
+            };
+          })
+        );
+
+        setNoteText(todayLog.notes || "");
+        setNoteDone((todayLog.notes || "").trim() !== "");
       } catch (error) {
-        console.error("Failed to fetch logs:", error);
+        console.error("Failed to fetch or create today's log:", error);
       } finally {
         setIsLoading(false);
       }
     }
 
-    fetchTodayLog();
+    fetchOrCreateTodayLog();
   }, [today]);
 
   async function toggleHabit(id) {
@@ -115,37 +135,36 @@ function HomePage() {
   }
 
   async function toggleNote() {
-  if (!todayLogId) return;
+    if (!todayLogId) return;
 
-  if (noteDone) {
-    setNoteDone(false);
-    return;
-  }
-
-  try {
-    const response = await fetch(`http://localhost:5000/api/logs/${todayLogId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        notes: noteText,
-      }),
-    });
-
-    const updatedLog = await response.json();
-    console.log("Saved note:", updatedLog);
-
-    if (!response.ok) {
-      throw new Error("Failed to save note");
+    if (noteDone) {
+      setNoteDone(false);
+      return;
     }
 
-    setNoteText(updatedLog.notes || "");
-    setNoteDone(true);
-  } catch (error) {
-    console.error("Failed to update note:", error);
+    try {
+      const response = await fetch(`http://localhost:5000/api/logs/${todayLogId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          notes: noteText,
+        }),
+      });
+
+      const updatedLog = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Failed to save note");
+      }
+
+      setNoteText(updatedLog.notes || "");
+      setNoteDone(true);
+    } catch (error) {
+      console.error("Failed to update note:", error);
+    }
   }
-}
 
   const completedHabits = habits.filter((habit) => habit.done).length;
   const totalHabits = habits.length;
@@ -155,6 +174,13 @@ function HomePage() {
     return <p>Loading habits...</p>;
   }
 
+    const todayFormatted = new Date().toLocaleDateString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+
   return (
     <main className="home">
       <div className="homeContainer">
@@ -162,7 +188,7 @@ function HomePage() {
           <h2 className="greetingTitle">
             Hello, <span>Pal!</span>
           </h2>
-          <p className="dateText">Thu, 2 Apr 2026</p>
+          <p className="dateText">{todayFormatted}</p>
         </section>
 
         <section className="heroCard">
@@ -235,9 +261,11 @@ function HomePage() {
 export default HomePage;
 
 /*
-1. This page fetches today's habit log from MongoDB when it loads.
-2. I store the MongoDB document id so the correct daily log can be updated later.
-3. Clicking a habit card now updates both the React UI and the database with a PUT request.
-4. Backend fields such as sleep, water, and exercise are mapped to frontend habit cards.
-5. The progress circle is calculated dynamically from real saved habit data.
+1. This page now fetches today's habit log and automatically creates a new one if the date has changed.
+2. Habit card clicks update both the React UI and the MongoDB document for the current day.
+3. The note field can be edited and saved to the same daily log in the database.
+4. The progress circle is calculated from real backend data instead of hardcoded values.
+5. In a larger app, this logic could be moved into hooks or services for cleaner architecture.
+6. The app generates today's date dynamically and creates a new database record per day, enabling 
+    real habit tracking over time.
 */

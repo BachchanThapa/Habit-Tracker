@@ -2,7 +2,6 @@ const DailyLog = require("../models/DailyLog");
 
 const getLogs = async (req, res) => {
   try {
-    console.log("PUT update body:", req.body);
     const logs = await DailyLog.find().sort({ createdAt: -1 });
     res.status(200).json(logs);
   } catch (error) {
