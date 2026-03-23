@@ -1,112 +1,53 @@
 import { useEffect, useState } from "react";
 import HabitCard from "../../components/HabitCard/HabitCard";
+import habitConfig from "../../data/habitConfig";
+import { getOrCreateTodayLog, updateLog } from "../../services/logService";
 import "./homePage.css";
 
 function HomePage() {
   const today = new Date().toISOString().split("T")[0];
 
   const [todayLogId, setTodayLogId] = useState("");
-  const [habits, setHabits] = useState([
-    {
-      id: 1,
-      field: "sleep",
-      title: "Sleep 7+ hrs",
-      icon: "/images/sleep.png",
+  const [habits, setHabits] = useState(
+    habitConfig.map((habit) => ({
+      ...habit,
       done: false,
-    },
-    {
-      id: 2,
-      field: "water",
-      title: "Hydration 8+ glass Water",
-      icon: "/images/water.png",
-      done: false,
-    },
-    {
-      id: 3,
-      field: "exercise",
-      title: "Exercise or Running 30+ minutes",
-      icon: "/images/exercise.png",
-      done: false,
-    },
-    {
-      id: 4,
-      field: "lowCarb",
-      title: "Low Carb. Diet",
-      icon: "/images/food.png",
-      done: false,
-    },
-    {
-      id: 5,
-      field: "noSugarDrink",
-      title: "No Sugary Drink",
-      icon: "/images/drink.png",
-      done: false,
-    },
-  ]);
-
+    }))
+  );
   const [noteText, setNoteText] = useState("");
   const [noteDone, setNoteDone] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchOrCreateTodayLog() {
+    async function fetchTodayLog() {
       try {
-        const response = await fetch("http://localhost:5000/api/logs");
-        const data = await response.json();
-
-         /* I check if today’s log exists. If not, this automatically creates a new empty record,
-          which resets the app for a new day while keeping history */
-        let todayLog = data.find((log) => log.date === today);
-
-        if (!todayLog) {
-          const createResponse = await fetch("http://localhost:5000/api/logs", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              date: today,
-              sleep: false,
-              water: false,
-              exercise: false,
-              lowCarb: false,
-              noSugarDrink: false,
-              notes: "",
-            }),
-          });
-
-          todayLog = await createResponse.json();
-        }
+        const todayLog = await getOrCreateTodayLog(today);
 
         setTodayLogId(todayLog._id);
 
         setHabits((currentHabits) =>
-          currentHabits.map((habit) => {
-            return {
-              ...habit,
-              done: todayLog[habit.field] || false,
-            };
-          })
+          currentHabits.map((habit) => ({
+            ...habit,
+            done: todayLog[habit.field] || false,
+          }))
         );
 
         setNoteText(todayLog.notes || "");
         setNoteDone((todayLog.notes || "").trim() !== "");
       } catch (error) {
-        console.error("Failed to fetch or create today's log:", error);
+        console.error("Failed to fetch today's log:", error);
       } finally {
         setIsLoading(false);
       }
     }
 
-    fetchOrCreateTodayLog();
+    fetchTodayLog();
   }, [today]);
 
   async function toggleHabit(id) {
     const clickedHabit = habits.find((habit) => habit.id === id);
 
-    if (!clickedHabit || !todayLogId) {
-      return;
-    }
+    if (!clickedHabit || !todayLogId) return;
 
     const newDoneValue = !clickedHabit.done;
 
@@ -120,14 +61,8 @@ function HomePage() {
     setHabits(updatedHabits);
 
     try {
-      await fetch(`http://localhost:5000/api/logs/${todayLogId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          [clickedHabit.field]: newDoneValue,
-        }),
+      await updateLog(todayLogId, {
+        [clickedHabit.field]: newDoneValue,
       });
     } catch (error) {
       console.error("Failed to update habit:", error);
@@ -143,21 +78,9 @@ function HomePage() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/logs/${todayLogId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          notes: noteText,
-        }),
+      const updatedLog = await updateLog(todayLogId, {
+        notes: noteText,
       });
-
-      const updatedLog = await response.json();
-
-      if (!response.ok) {
-        throw new Error("Failed to save note");
-      }
 
       setNoteText(updatedLog.notes || "");
       setNoteDone(true);
@@ -170,16 +93,16 @@ function HomePage() {
   const totalHabits = habits.length;
   const percent = Math.round((completedHabits / totalHabits) * 100);
 
+  const todayFormatted = new Date().toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   if (isLoading) {
     return <p>Loading habits...</p>;
   }
-
-    const todayFormatted = new Date().toLocaleDateString("en-GB", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
 
   return (
     <main className="home">
@@ -261,11 +184,8 @@ function HomePage() {
 export default HomePage;
 
 /*
-1. This page now fetches today's habit log and automatically creates a new one if the date has changed.
-2. Habit card clicks update both the React UI and the MongoDB document for the current day.
-3. The note field can be edited and saved to the same daily log in the database.
-4. The progress circle is calculated from real backend data instead of hardcoded values.
-5. In a larger app, this logic could be moved into hooks or services for cleaner architecture.
-6. The app generates today's date dynamically and creates a new database record per day, enabling 
-    real habit tracking over time.
+1. This page uses shared config and service files instead of keeping all logic in one component.
+2. Habit data is reused from habitConfig, which avoids repeating the same setup in multiple pages.
+3. Backend fetch, create, and update calls are handled through logService for cleaner architecture.
+4. HomePage focuses more on UI rendering and user interaction than raw API code.
 */
