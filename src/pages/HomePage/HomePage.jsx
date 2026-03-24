@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HabitCard from "../../components/HabitCard/HabitCard";
+import HeroCard from "../../components/HeroCard/HeroCard";
 import habitConfig from "../../data/habitConfig";
 import { getOrCreateTodayLog, updateLog } from "../../services/logService";
 import "./homePage.css";
@@ -12,7 +13,7 @@ function HomePage() {
     habitConfig.map((habit) => ({
       ...habit,
       done: false,
-    }))
+    })),
   );
   const [noteText, setNoteText] = useState("");
   const [noteDone, setNoteDone] = useState(false);
@@ -29,7 +30,7 @@ function HomePage() {
           currentHabits.map((habit) => ({
             ...habit,
             done: todayLog[habit.field] || false,
-          }))
+          })),
         );
 
         setNoteText(todayLog.notes || "");
@@ -105,8 +106,8 @@ function HomePage() {
   }
 
   return (
-    <main className="home">
-      <div className="homeContainer">
+    <main className="page">
+      <div className="container">
         <section className="greetingSection">
           <h2 className="greetingTitle">
             Hello, <span>Pal!</span>
@@ -114,7 +115,7 @@ function HomePage() {
           <p className="dateText">{todayFormatted}</p>
         </section>
 
-        <section className="heroCard">
+        <HeroCard>
           <div className="heroLeft">
             <div
               className="circle"
@@ -136,7 +137,7 @@ function HomePage() {
             </h3>
             <p>completed today!</p>
           </div>
-        </section>
+        </HeroCard>
 
         <section className="habitsSection">
           <h3 className="habitsTitle">Daily Habits</h3>

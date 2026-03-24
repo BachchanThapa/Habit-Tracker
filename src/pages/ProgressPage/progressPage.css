@@ -1,0 +1,187 @@
+.page {
+  padding: 0;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.progressGreetingSection {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.progressGreetingTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222222;
+}
+
+.progressGreetingTitle span {
+  color: #ff6b00;
+}
+
+.progressDateText {
+  font-size: 14px;
+  color: #444444;
+}
+
+.progressHeroContent {
+  width: 100%;
+  text-align: center;
+}
+
+.progressHeroTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 22px;
+}
+
+.progressDots {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.progressDot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.progressDot.done {
+  background: #48d97d;
+}
+
+.progressDot.pending {
+  background: #d9d9d9;
+}
+
+.progressSection {
+  margin-bottom: 12px;
+}
+
+.progressSectionTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2937;
+  text-align: left;
+}
+
+.progressHabitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.progressHabitCard,
+.progressNoteCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d6dbe1;
+  border-radius: 10px;
+  padding: 12px;
+  background: white;
+}
+
+.progressHabitCard.done,
+.progressNoteCard.done {
+  background: #eef8ee;
+}
+
+.progressHabitCard.pending,
+.progressNoteCard.pending {
+  background: #f3f3f3;
+}
+
+.progressHabitIconBox,
+.progressNoteIconBox {
+  width: 64px;
+  height: 64px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progressHabitIconBox img,
+.progressNoteIconBox img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.progressHabitText,
+.progressNoteTextBox {
+  flex: 1;
+  min-width: 0;
+}
+
+.progressHabitText p,
+.progressNoteTextBox p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+  word-break: break-word;
+}
+
+.progressHabitCheck,
+.progressNoteCheck {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #56c271;
+  color: white;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.progressHabitCard.pending .progressHabitCheck,
+.progressNoteCard.pending .progressNoteCheck {
+  background: #b8b0b0;
+}
+
+.progressNoteCard {
+  max-width: 520px;
+}
+
+@media (max-width: 768px) {
+  .progressPage {
+    padding: 16px;
+  }
+
+  .progressGreetingTitle {
+    font-size: 1.7rem;
+  }
+
+  .progressHeroTitle {
+    font-size: 1.6rem;
+  }
+
+  .progressHabitGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .progressDot {
+    width: 50px;
+    height: 50px;
+  }
+
+  .progressNoteCard {
+    max-width: 100%;
+  }
+}

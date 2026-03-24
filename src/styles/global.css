@@ -1,0 +1,5 @@
+/* Fixing inconsistent icon padding across app as these icons were relatively smaller */
+img[src*="exercise"],
+img[src*="food"] {
+  transform: scale(1.6);
+}

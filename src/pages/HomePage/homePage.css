@@ -1,10 +1,11 @@
-.home {
-  padding: 24px 20px 40px;
+.page {
+  padding: 0;
 }
 
-.homeContainer {
-  max-width: 1000px;
+.container {
+  max-width: 1120px;
   margin: 0 auto;
+  padding: 0 24px;
 }
 
 .greetingSection {
@@ -29,19 +30,6 @@
   color: #444444;
 }
 
-/* 🔥 HERO CARD */
-.heroCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  min-height: 160px;
-  padding: 24px 36px;
-  margin-bottom: 26px;
-  border-radius: 10px;
-  color: white;
-  background: linear-gradient(90deg, #f6a24a 0%, #ff6b00 100%);
-}
 
 /* 🔵 PROGRESS CIRCLE */
 .circle {
@@ -76,14 +64,18 @@
 }
 
 .heroRight h3 {
-  font-size: 22px;
+  margin-top: 4px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 4px;
+  color: white;
 }
 
 .heroRight p {
-  font-size: 16px;
+  font-size: 20px;
   margin: 0;
+  color: white;
+  font-weight: 600;
 }
 
 /* ✅ DAILY HABITS */
