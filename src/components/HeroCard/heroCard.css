@@ -1,0 +1,26 @@
+.heroCard {
+  background: linear-gradient(90deg, #f2a34a 0%, #ff6b00 100%);
+  border-radius: 12px;
+  min-height: 180px;
+  padding: 28px 24px;
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+/*
+1. Shared orange gradient design across all pages.
+2. Flexible centered content layout for reuse across different page types.
+3. Page-specific inner content can still style itself differently.
+*/
