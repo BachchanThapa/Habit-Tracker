@@ -1,0 +1,286 @@
+
+.page {
+  padding: 0;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+
+.statsGreetingSection {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.statsGreetingTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #222222;
+  margin-bottom: 6px;
+}
+
+.statsGreetingTitle span {
+  color: #ff6b00;
+}
+
+.statsDateText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444444;
+}
+.statsHeroContent {
+  width: 100%;
+  text-align: center;
+}
+
+.statsHeroTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.statsHeroSubtitle {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 18px;
+}
+
+.statsChartWrap {
+  position: relative;
+  height: 240px;
+  width: 100%;
+}
+
+.statsLegend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 14px 0 18px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legendDot.sleep {
+  background: #32c85a;
+}
+
+.legendDot.diet {
+  background: #f4c20d;
+}
+
+.legendDot.exercise {
+  background: #9b5de5;
+}
+
+.legendDot.water {
+  background: #3b82f6;
+}
+
+.legendDot.noSugar {
+  background: #d1d5db;
+}
+
+.statsSummary {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.statsChip {
+  background: #f3f4f6;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.statsSection {
+  margin-bottom: 12px;
+}
+
+.statsSectionTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1f2937;
+  text-align: left;
+}
+
+.statsHabitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.statsHabitCard,
+.statsNoteCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #d6dbe1;
+  border-radius: 10px;
+  padding: 12px;
+  background: white;
+}
+
+.statsHabitCard.done,
+.statsNoteCard.done {
+  background: #eef8ee;
+}
+
+.statsHabitCard.pending,
+.statsNoteCard.pending {
+  background: #f3f3f3;
+}
+
+.statsHabitIconBox,
+.statsNoteIconBox {
+  width: 64px;
+  height: 64px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statsHabitIconBox img,
+.statsNoteIconBox img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.statsHabitText,
+.statsNoteTextBox {
+  flex: 1;
+  min-width: 0;
+}
+
+.statsHabitText p,
+.statsNoteTextBox p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+  word-break: break-word;
+}
+
+.statsHabitCheck,
+.statsNoteCheck {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #56c271;
+  color: white;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statsHabitCard.pending .statsHabitCheck,
+.statsNoteCard.pending .statsNoteCheck {
+  background: #b8b0b0;
+}
+
+.statsNoteCard {
+  max-width: 520px;
+}
+
+@media (max-width: 768px) {
+  .statsGreetingTitle {
+    font-size: 1.7rem;
+  }
+
+  .statsHeroTitle {
+    font-size: 1.6rem;
+  }
+
+  .statsChartWrap {
+    height: 210px;
+  }
+
+  .statsHabitGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .statsNoteCard {
+    max-width: 100%;
+  }
+}
+/* ===== TOP ROW (title + button) ===== */
+.statsHeroTopRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* ===== 30 DAYS BUTTON ===== */
+.statsMonthlyButton {
+  background: white;
+  color: #ff6b00;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statsMonthlyButton:hover {
+  background: #fff3e8;
+  transform: translateY(-1px);
+}
+
+/* ===== MONTHLY PREVIEW CARD ===== */
+.statsMonthlyPreviewCard {
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 14px;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.statsMonthlyPreviewCard h4 {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.statsMonthlyPreviewCard p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* ===== SMALL ALIGNMENT FIX ===== */
+.statsHeroContent {
+  padding-top: 6px;
+}
