@@ -61,3 +61,11 @@
 .nav a:hover {
   color: #f97316;
 }
+
+/* Active menu item */
+.nav a.active {
+  color: #ff6b00;
+  font-weight: 600;
+  border-bottom: 2px solid #ff6b00;
+  padding-bottom: 2px;
+}
