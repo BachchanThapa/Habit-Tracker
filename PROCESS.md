@@ -124,11 +124,17 @@ Detta gjorde det enklare att arbeta strukturerat och undvika fel.
 
 ## 🌐 Deployment
 
-Frontend-delen av applikationen kan deployas via Vercel.
+Frontend-delen av applikationen är deployad via Vercel:
 
-Detta gör det möjligt att visa applikationen live, men backend (API och MongoDB) körs lokalt i denna version.
+https://habit-tracker-sigma-gules.vercel.app
 
-Deployment användes främst för att demonstrera gränssnittet.
+Detta gör det möjligt att visa applikationen live i webbläsaren.
+
+Backend (Express API) är däremot inte deployad i denna version och körs lokalt tillsammans med MongoDB Atlas.
+
+Det innebär att applikationen på Vercel endast visar gränssnittet (React), men inte kan hämta, spara eller uppdatera data.
+
+För att få full funktionalitet krävs att backend också deployas, så att API:t kan kommunicera med databasen och göra applikationen dynamisk.
 ## 🚀 Sammanfattning
 
 Projektet visar:
