@@ -122,6 +122,29 @@ Detta gjorde det enklare att arbeta strukturerat och undvika fel.
 
 ---
 
+## 📋 Projektplanering (GitHub Projects)
+
+Under utvecklingen använde jag GitHub Projects för att planera och följa upp arbetet.
+
+Arbetet delades upp i mindre uppgifter som flyttades mellan olika steg:
+- Backlog → planerade uppgifter
+- In progress → pågående arbete
+- Done → färdiga funktioner
+- Future Improvements → funktioner som planerades men prioriterades bort
+
+![Project Board](public/images/projectHabitTracker.png)
+
+Projektet planerades och följdes även upp med GitHub Projects.
+
+(Projektboard)  
+https://github.com/users/BachchanThapa/projects/4
+
+Detta hjälpte mig att arbeta strukturerat och fokusera på att först bygga en stabil och fungerande applikation.
+
+Funktioner som autentisering (AWS Amplify) planerades men flyttades till framtida förbättringar eftersom de krävde mer tid och större förändringar i projektet.
+
+---
+
 ## 🌐 Deployment
 
 Frontend-delen av applikationen är deployad via Vercel:
