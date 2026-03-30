@@ -34,7 +34,7 @@ Designen hjälpte mig att:
 
 Under utvecklingen gjordes vissa justeringar jämfört med Figma-designen, eftersom verklig implementation kräver anpassningar för funktionalitet och användbarhet.
 
-![Figma Design](./public/images/figma.png)
+![Figma Design](/images/figma.png)
 
 Figma-länk:  
 https://www.figma.com/design/YPDnyTpbJzQ3xWfdRJZT3i/Untitled?node-id=0-1&p=f&t=cvexxZbRBqFapGss-0
@@ -50,7 +50,7 @@ Det visar:
 - Hur API-anrop skickas till backend
 - Hur data sparas och hämtas från databasen
 
-![Flowchart](./public/images/flowchart.png)
+![Flowchart](/images/flowchart.png)
 
 FigJam-länk:  
 https://www.figma.com/board/nR3i82mXNskywbLgBevE9z/Habit-Tracker-Logics?node-id=0-1&p=f&t=VGIXItDHvurehqY6-0
@@ -79,7 +79,7 @@ Jag verifierade:
 - Att data kan hämtas (GET)
 - Att data kan uppdateras (PUT)
 
-![API Testing](./public/images/insomnia.png)
+![API Testing](/images/insomnia.png)
 
 ---
 
@@ -103,7 +103,7 @@ Detta skulle innebära:
 - Skydd av personlig data
 - Hantering av flera användare
 
-Jag valde att inte implementera detta i slutversionen eftersom det kräver större omstrukturering av applikationen och mer tid.
+Jag valde att inte implementera detta i slutversionen eftersom det kräver mer tid och en större omstrukturering av applikationen.
 
 Det är dock en möjlig vidareutveckling.
 
@@ -116,7 +116,7 @@ Under projektet har jag använt Git för versionshantering.
 Jag har arbetat med:
 - feature-branches för nya funktioner
 - dev-branch för utveckling
-- merging av färdiga funktioner till dev
+- merging av färdiga funktioner
 
 Detta gjorde det enklare att arbeta strukturerat och undvika fel.
 
@@ -135,6 +135,46 @@ Backend (Express API) är däremot inte deployad i denna version och körs lokal
 Det innebär att applikationen på Vercel endast visar gränssnittet (React), men inte kan hämta, spara eller uppdatera data.
 
 För att få full funktionalitet krävs att backend också deployas, så att API:t kan kommunicera med databasen och göra applikationen dynamisk.
+
+---
+
+## 📊 Lighthouse-test
+
+Som en del av kvalitetssäkringen testades applikationen med Lighthouse i Chrome DevTools.
+
+För att få ett mer realistiskt resultat kördes testet i production preview-läge (`npm run build` och `npm run preview`) istället för enbart i utvecklingsläge.
+
+### Desktop-resultat
+
+![Desktop Lighthouse](/images/desktopLighthouse.png)
+
+Resultat:
+- Performance: 97
+- Accessibility: 95
+- Best Practices: 100
+- SEO: 75
+
+### Mobil-resultat
+
+![Mobile Lighthouse](/images/mobileLighthouse.png)
+
+Resultat:
+- Performance: 87
+- Accessibility: 95
+- Best Practices: 100
+- SEO: 75
+
+Resultatet visar att applikationen har mycket god prestanda, hög tillgänglighet och följer bra tekniska standarder.
+
+Jag valde att använda Lighthouse för att kontrollera kvaliteten och blev positivt överraskad över resultaten.
+
+Vid vidare utveckling skulle prestanda kunna förbättras ytterligare genom till exempel:
+- optimering av bilder
+- lazy loading
+- ytterligare SEO-förbättringar
+
+---
+
 ## 🚀 Sammanfattning
 
 Projektet visar:
@@ -144,5 +184,6 @@ Projektet visar:
 - UI-design med Figma
 - Logiskt tänkande via flowchart
 - Testning med externa verktyg
+- Prestanda- och kvalitetsanalys med Lighthouse
 
 Applikationen är fullt fungerande och kan vidareutvecklas med fler funktioner.
