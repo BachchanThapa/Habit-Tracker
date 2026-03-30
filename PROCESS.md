@@ -34,7 +34,7 @@ Designen hjälpte mig att:
 
 Under utvecklingen gjordes vissa justeringar jämfört med Figma-designen, eftersom verklig implementation kräver anpassningar för funktionalitet och användbarhet.
 
-![Figma Design](/images/figma.png)
+![Figma Design](public/images/figma.png)
 
 Figma-länk:  
 https://www.figma.com/design/YPDnyTpbJzQ3xWfdRJZT3i/Untitled?node-id=0-1&p=f&t=cvexxZbRBqFapGss-0
@@ -50,7 +50,7 @@ Det visar:
 - Hur API-anrop skickas till backend
 - Hur data sparas och hämtas från databasen
 
-![Flowchart](/images/flowchart.png)
+![Flowchart](public/images/flowchart.png)
 
 FigJam-länk:  
 https://www.figma.com/board/nR3i82mXNskywbLgBevE9z/Habit-Tracker-Logics?node-id=0-1&p=f&t=VGIXItDHvurehqY6-0
@@ -79,7 +79,7 @@ Jag verifierade:
 - Att data kan hämtas (GET)
 - Att data kan uppdateras (PUT)
 
-![API Testing](/images/insomnia.png)
+![API Testing](public/images/insomnia.png)
 
 ---
 
@@ -146,7 +146,7 @@ För att få ett mer realistiskt resultat kördes testet i production preview-l�
 
 ### Desktop-resultat
 
-![Desktop Lighthouse](/images/desktopLighthouse.png)
+![Desktop Lighthouse](public/images/desktopLighthouse.png)
 
 Resultat:
 - Performance: 97
@@ -156,7 +156,7 @@ Resultat:
 
 ### Mobil-resultat
 
-![Mobile Lighthouse](/images/mobileLighthouse.png)
+![Mobile Lighthouse](public/images/mobileLighthouse.png)
 
 Resultat:
 - Performance: 87
